@@ -17,7 +17,7 @@ G = nx.DiGraph()
 # rt_network = []
 rt_network = dict()
 
-with open("../data/higgs-activity_time_sample_2.txt") as f:
+with open("../data/higgs-activity_time_sample.txt") as f:
     for line in f:
         # split tweet activity line into list
         # [id of tweeter, id of retweeter, timestamp, mention or retweet indicator]
@@ -35,12 +35,22 @@ with open("../data/higgs-activity_time_sample_2.txt") as f:
             if time in rt_network.keys():
                 # print("time:", time)
                 rt_network[time].append(connection)
+
+                # Add nodes/edges to our DiGraph
+                G.add_edges_from(rt_network[time])
+                # print(nx.info(G))
                 # print(rt_network)
             else:
-                rt_network[time] = [connection]
                 # Add newly generated tweet dictionary to retweet network dictionary
+                rt_network[time] = [connection]
 
-print(rt_network)
+                # Add nodes/edges to our DiGraph
+                G.add_edges_from(rt_network[time])
+                # print(nx.info(G))
+
+print(nx.degree(G))
+# print(rt_network)
+# print(nx.info(G))
             # Add edges to Graph
             # G.add_edges_from([connection])
             # Print degrees of G
