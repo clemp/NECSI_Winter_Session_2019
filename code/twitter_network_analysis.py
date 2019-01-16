@@ -38,7 +38,7 @@ with open("../data/higgs-activity_time_sample.txt") as f:
                 rt_network[time].append(connection)
 
                 # Add nodes/edges to our DiGraph
-                G.add_edges_from(rt_network[time])
+                # G.add_edges_from(rt_network[time])
                 # print(nx.info(G))
                 # print(rt_network)
             else:
@@ -46,11 +46,39 @@ with open("../data/higgs-activity_time_sample.txt") as f:
                 rt_network[time] = [connection]
 
                 # Add nodes/edges to our DiGraph
-                G.add_edges_from(rt_network[time])
+                # G.add_edges_from(rt_network[time])
                 # print(nx.info(G))
 
-print(nx.degree(G))
-# print(rt_network)
+# print(nx.degree(G))
+# print(type(rt_network))
+
+
+# Create dictionary to hold Kin distribution at each time entry
+in_degree_dists = dict()
+
+# For each time entry in our 'retweet network' dictionary, add nodes/edges
+for time in rt_network:
+    # Add nodes/edges created from retweets at that timestamp
+    # print("time:", time)
+
+    # Empty dictionary to hold distribution data
+    in_dist = []
+    G.add_edges_from(rt_network[time])
+
+    # Generate in-degree distribution at that timestamp
+    # print(G.in_degree())
+    for degree in G.in_degree():
+        in_dist.append(degree[1])
+        # print(degree[1])
+    # print("time: ", time, ", dist: ", sorted(in_dist))
+
+    in_degree_dists[time] = sorted(in_dist)
+
+    print(in_degree_dists)
+    # print(nx.info(G))
+    # print(G.in_degree())
+    # print(sorted(set(G.in_degree().values())))
+    # print("time:", time, rt_network[time])
 # print(nx.info(G))
             # Add edges to Graph
             # G.add_edges_from([connection])
