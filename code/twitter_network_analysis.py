@@ -1,6 +1,7 @@
 # https://snap.stanford.edu/data/higgs-twitter.html
 import networkx as nx
 import re
+from datetime import datetime
 
 # Create empty Graph
 G = nx.DiGraph()
@@ -70,11 +71,11 @@ for time in rt_network:
     for degree in G.in_degree():
         in_dist.append(degree[1])
         # print(degree[1])
-    # print("time: ", time, ", dist: ", sorted(in_dist))
+    print("time: ", datetime.fromtimestamp(int(time)), ", dist: ", sorted(in_dist))
 
     in_degree_dists[time] = sorted(in_dist)
 
-    print(in_degree_dists)
+    # print(in_degree_dists)
     # print(nx.info(G))
     # print(G.in_degree())
     # print(sorted(set(G.in_degree().values())))
