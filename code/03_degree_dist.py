@@ -10,7 +10,8 @@ G = nx.DiGraph()
 rt_dist = []
 
 counter = 0
-with open("../data/split_files/higgs-activity_time_sorted_RT00.txt") as f:
+# with open("../data/split_files/higgs-activity_time_sorted_RT00.txt") as f:
+with open("../data/higgs-activity_time_sorted_RT.txt") as f:
     for line in f:
         # split tweet activity line into list
         # [id of tweeter, id of retweeter, timestamp, mention or retweet indicator]
@@ -26,20 +27,20 @@ with open("../data/split_files/higgs-activity_time_sorted_RT00.txt") as f:
 
         # print(G.in_degree())
 
-        # counter += 1
-        #
-        # if counter == 10:
-        #     break
+        counter += 1
+
+        if counter == 20:
+            break
 
 f.close()
-print("# of nodes in G:", nx.number_of_nodes(G))
-print("G.in_degree(): ", G.in_degree())
+# print("# of nodes in G:", nx.number_of_nodes(G))
+# print("G.in_degree(): ", G.in_degree())
 # Create list of nodes and degrees
 degs = [d[1] for d in G.in_degree()]
 counts = list(set([(deg, degs.count(deg)) for deg in degs]))
 # counts.sort()
 # print("counts: ", counts)
-print("sorted counts: ", sorted(counts))
+# print("sorted counts: ", sorted(counts))
 
 # [(0, 9), (1, 5), (2, 1), (3, 1)]
 
@@ -60,7 +61,7 @@ def degree_invcumsum(dcounts):
         # For every tuple, sum all the ndegree counts for subsequent tuples
         for n, ndegs in dcounts[idx:]:
             inv_cumsum += ndegs
-        print("n: ", n, " ndegs: ", ndegs, " inv_cumsum: ", inv_cumsum)
+        # print("n: ", n, " ndegs: ", ndegs, " inv_cumsum: ", inv_cumsum)
             # print("ndegs:", ndegs)
         # Append inverse cumulative count to the list
         invcum_dist.append((dcounts[idx][0], inv_cumsum))
@@ -68,9 +69,15 @@ def degree_invcumsum(dcounts):
     # print("inv cumsum: ", invcum_ dist)
     return(invcum_dist)
 
-with open('../data/invcum_sum_output/higgs-activity_time_sorted_invcumsum_RT00.txt', 'w+') as output:
-    output.write(str(degree_invcumsum(sorted(counts))))
-output.close()
+print("degs:", degs)
+print("counts: ", counts)
+print("Counter(degs).most_common(): ", Counter(degs).most_common())
+print("degree_invcumsum(sorted(counts)):", degree_invcumsum(sorted(counts)))
+
+
+# with open('../data/invcum_sum_output/higgs-activity_time_sorted_invcumsum_RT00.txt', 'w+') as output:
+#     output.write(str(degree_invcumsum(sorted(counts))))
+# output.close()
 # print(degree_invcumsum(sorted(counts)))
 # For each tuple, sum number of degrees for each subsequent tuple in sorted degree counts list
 
