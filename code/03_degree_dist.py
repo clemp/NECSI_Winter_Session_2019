@@ -26,10 +26,10 @@ with open("../data/split_files/higgs-activity_time_sorted_RT00.txt") as f:
 
         # print(G.in_degree())
 
-        counter += 1
-
-        if counter == 10:
-            break
+        # counter += 1
+        #
+        # if counter == 10:
+        #     break
 
 f.close()
 print("# of nodes in G:", nx.number_of_nodes(G))
@@ -65,9 +65,13 @@ def degree_invcumsum(dcounts):
         # Append inverse cumulative count to the list
         invcum_dist.append((dcounts[idx][0], inv_cumsum))
     # print("degree counts list: ", dcounts)
-    # print("inv cumsum: ", invcum_dist)
+    # print("inv cumsum: ", invcum_ dist)
     return(invcum_dist)
-degree_invcumsum(sorted(counts))
+
+with open('../data/invcum_sum_output/higgs-activity_time_sorted_invcumsum_RT00.txt', 'w+') as output:
+    output.write(str(degree_invcumsum(sorted(counts))))
+output.close()
+# print(degree_invcumsum(sorted(counts)))
 # For each tuple, sum number of degrees for each subsequent tuple in sorted degree counts list
 
 # print("degs: ", degs)
