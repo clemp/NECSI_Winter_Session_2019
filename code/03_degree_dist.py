@@ -38,8 +38,12 @@ degs = [d[1] for d in G.in_degree()]
 counts = list(set([(deg, degs.count(deg)) for deg in degs]))
 counts.sort()
 print(counts)
-
+print("degs: ", degs)
 # Create x, y values for plotting
 # x = possible degrees a node can have
 # y = number of nodes with degree >= x
 # We will create plot of log(x), log(y)
+
+# Create list of all possible degrees, from min to max
+x = list(range(max(degs)+1))
+print("x: ", x)
