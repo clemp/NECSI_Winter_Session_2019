@@ -64,8 +64,8 @@ def degree_invcumsum(dcounts):
             # print("ndegs:", ndegs)
         # Append inverse cumulative count to the list
         invcum_dist.append((dcounts[idx][0], inv_cumsum))
-    print("degree counts list: ", dcounts)
-    print("inv cumsum: ", invcum_dist)
+    # print("degree counts list: ", dcounts)
+    # print("inv cumsum: ", invcum_dist)
     return(invcum_dist)
 degree_invcumsum(sorted(counts))
 # For each tuple, sum number of degrees for each subsequent tuple in sorted degree counts list
