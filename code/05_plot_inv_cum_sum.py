@@ -15,19 +15,38 @@ y2 = [d[1] for d in test_icsd2[1:]]
 # Plot properties
 a = 0.6
 
-ax = plt.gca()
+# ax = plt.gca()
+plt.rcParams.update({
+    "lines.color": "white",
+    "patch.edgecolor": "white",
+    "text.color": "black",
+    "axes.facecolor": "black",
+    "axes.edgecolor": "lightgray",
+    "axes.labelcolor": "white",
+    "xtick.color": "white",
+    "ytick.color": "white",
+    "grid.color": "lightgray",
+    "legend.facecolor": "white",
+    "figure.facecolor": "black",
+    "figure.edgecolor": "black",
+    "savefig.facecolor": "black",
+    "savefig.edgecolor": "black"})
 # Configure plot figure
 plt.figure(figsize=(13, 8)) # adjust figure size
+# plt.style.use('dark_background')
 # plt.plot(x, y, 'g-', label='model') # plot with green line
 
-plt.scatter(x1, y1, s=4, alpha = a, label='# RTs <= 35k')
-plt.scatter(x2, y2, s=4, alpha = a, label='35k < # RTs <= 70k')
+plt.scatter(x1, y1, s=6, alpha = a, label='# RTs <= 35k')
+plt.scatter(x2, y2, s=6, alpha = a, label='35k < # RTs <= 70k')
 
-plt.ylabel(r"$inverse cum. sum of <Kin>$", size = 18) # add LaTeX label on y-axis, increase size
-plt.xlabel(r"$num. nodes$", size = 18) # add label on x-axis, increase size
+plt.ylabel('inverse cumulative sum of Kin', size = 18, color='w') # add LaTeX label on y-axis, increase size
+plt.xlabel('Kin', size = 18, color='w') # add label on x-axis, increase size
+
+# Create x,y axis log scale
 plt.xscale("log")
 plt.yscale("log")
 
+plt.setp(plt.legend().get_texts(), color='w')
 plt.legend(loc='best') # add legend for labels
 plt.tight_layout() # fit chart to output figure
 plt.show()
