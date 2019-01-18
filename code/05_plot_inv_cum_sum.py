@@ -53,6 +53,10 @@ plt.scatter(x2, y2, s=6, alpha = a, label='# RTs 350k+ fit')
 plt.plot(x1, 10**y11, label='# RTs <= 35k fit', alpha=0.5)
 plt.plot(x2, 10**y22, label='# RTs 350k+ fit', alpha=0.5)
 
+# Label fit alpha coefficients
+plt.text(x1[10], 10**y11[10], "coeff = " + str(round(fit1[0], 2)-1), size=14, color='w')
+plt.text(x2[10], 10**y22[10], "coeff = " + str(round(fit2[0], 2)-1), size=14, color='w')
+
 
 plt.ylabel('inverse cumulative sum of Kin', size = 18, color='w') # add LaTeX label on y-axis, increase size
 plt.xlabel('Kin', size = 18, color='w') # add label on x-axis, increase size
