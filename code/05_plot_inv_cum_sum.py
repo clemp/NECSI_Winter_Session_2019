@@ -12,6 +12,16 @@ y1 = [d[1] for d in test_icsd1[1:]]
 x2 = [d[0] for d in test_icsd2[1:]]
 y2 = [d[1] for d in test_icsd2[1:]]
 
+fit1 = np.polyfit(np.log10(x1), np.log10(y1), 1)
+fit2 = np.polyfit(np.log10(x2), np.log10(y2), 1)
+
+print("fit1: ", fit1)
+print("fit2: ", fit2)
+
+y11 = np.polyval(fit1, np.log10(x1)) # fit line of x1, y1; plot 10**y11
+
+y22 = np.polyval(fit2, np.log10(x2)) # fit line of x2, y2; plot 10**y22
+
 # Plot properties
 a = 0.6
 
@@ -37,7 +47,12 @@ plt.figure(figsize=(13, 8)) # adjust figure size
 # plt.plot(x, y, 'g-', label='model') # plot with green line
 
 plt.scatter(x1, y1, s=6, alpha = a, label='# RTs <= 35k')
-plt.scatter(x2, y2, s=6, alpha = a, label='35k < # RTs <= 70k')
+plt.scatter(x2, y2, s=6, alpha = a, label='# RTs 350k+ fit')
+
+# Plot fit lines
+plt.plot(x1, 10**y11, label='# RTs <= 35k fit', alpha=0.5)
+plt.plot(x2, 10**y22, label='# RTs 350k+ fit', alpha=0.5)
+
 
 plt.ylabel('inverse cumulative sum of Kin', size = 18, color='w') # add LaTeX label on y-axis, increase size
 plt.xlabel('Kin', size = 18, color='w') # add label on x-axis, increase size
